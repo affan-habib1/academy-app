@@ -1,0 +1,27 @@
+"use client";
+
+import dynamic from "next/dynamic";
+import type { ApexOptions } from "apexcharts";
+
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+
+export function EnrollmentBarChart({ categories, data }: { categories: string[]; data: number[] }) {
+  const options: ApexOptions = {
+    chart: {
+      toolbar: { show: false },
+      foreColor: "#475569",
+    },
+    plotOptions: {
+      bar: { borderRadius: 6, columnWidth: "50%" },
+    },
+    dataLabels: { enabled: false },
+    xaxis: { categories },
+    yaxis: { labels: { formatter: (value) => `${value}` } },
+    colors: ["#10b981"],
+    grid: { strokeDashArray: 4, borderColor: "#e2e8f0" },
+  };
+
+  const series = [{ name: "Enrollments", data }];
+
+  return <Chart options={options} series={series} type="bar" height={320} />;
+}

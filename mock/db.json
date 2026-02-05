@@ -1,0 +1,404 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "firstName": "Ava",
+      "lastName": "Henderson",
+      "email": "ava.henderson@northbridge.edu",
+      "year": "Senior",
+      "major": "Computer Science",
+      "notes": "Capstone in AI ethics.",
+      "attributes": [
+        { "key": "Advisor", "value": "Dr. Park" },
+        { "key": "Scholarship", "value": "Merit" }
+      ],
+      "createdAt": "2024-08-15T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "firstName": "Liam",
+      "lastName": "Patel",
+      "email": "liam.patel@northbridge.edu",
+      "year": "Junior",
+      "major": "Business Analytics",
+      "notes": "Prefers evening sections.",
+      "attributes": [{ "key": "Cohort", "value": "2026" }],
+      "createdAt": "2024-08-16T10:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "firstName": "Sophia",
+      "lastName": "Martinez",
+      "email": "sophia.martinez@northbridge.edu",
+      "year": "Sophomore",
+      "major": "Biology",
+      "notes": "Lab assistant for Molecular Biology.",
+      "attributes": [{ "key": "Lab", "value": "Genomics" }],
+      "createdAt": "2024-08-17T10:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "firstName": "Noah",
+      "lastName": "Kim",
+      "email": "noah.kim@northbridge.edu",
+      "year": "Freshman",
+      "major": "Engineering",
+      "notes": "Needs onboarding support.",
+      "attributes": [{ "key": "Orientation", "value": "Pending" }],
+      "createdAt": "2024-08-18T10:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "firstName": "Emma",
+      "lastName": "Rodriguez",
+      "email": "emma.rodriguez@northbridge.edu",
+      "year": "Senior",
+      "major": "Mathematics",
+      "notes": "Applying to graduate school.",
+      "attributes": [{ "key": "Research", "value": "Applied Statistics" }],
+      "createdAt": "2024-08-19T10:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "firstName": "Olivia",
+      "lastName": "Brooks",
+      "email": "olivia.brooks@northbridge.edu",
+      "year": "Junior",
+      "major": "History",
+      "notes": "Interested in archival internships.",
+      "attributes": [{ "key": "Track", "value": "Public History" }],
+      "createdAt": "2024-08-20T10:00:00.000Z"
+    },
+    {
+      "id": 7,
+      "firstName": "Mason",
+      "lastName": "Lee",
+      "email": "mason.lee@northbridge.edu",
+      "year": "Sophomore",
+      "major": "Economics",
+      "notes": "Double major under consideration.",
+      "attributes": [{ "key": "Minor", "value": "Data Science" }],
+      "createdAt": "2024-08-21T10:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "firstName": "Isabella",
+      "lastName": "Chen",
+      "email": "isabella.chen@northbridge.edu",
+      "year": "Graduate",
+      "major": "Information Systems",
+      "notes": "Teaching assistant for MIS-410.",
+      "attributes": [{ "key": "TA", "value": "MIS-410" }],
+      "createdAt": "2024-08-22T10:00:00.000Z"
+    },
+    {
+      "id": 9,
+      "firstName": "Lucas",
+      "lastName": "Ahmed",
+      "email": "lucas.ahmed@northbridge.edu",
+      "year": "Senior",
+      "major": "Psychology",
+      "notes": "Leading peer mentorship program.",
+      "attributes": [{ "key": "Mentor", "value": "Yes" }],
+      "createdAt": "2024-08-23T10:00:00.000Z"
+    },
+    {
+      "id": 10,
+      "firstName": "Mia",
+      "lastName": "Johnson",
+      "email": "mia.johnson@northbridge.edu",
+      "year": "Freshman",
+      "major": "English",
+      "notes": "Interested in journalism track.",
+      "attributes": [{ "key": "Track", "value": "Journalism" }],
+      "createdAt": "2024-08-24T10:00:00.000Z"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "code": "CS-320",
+      "title": "Applied Machine Learning",
+      "department": "Computer Science",
+      "credits": 4,
+      "description": "Supervised learning, model evaluation, and deployment.",
+      "facultyIds": [1, 4],
+      "metadata": [{ "key": "Lab", "value": "Yes" }],
+      "createdAt": "2024-07-10T09:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "code": "BUS-330",
+      "title": "Strategic Analytics",
+      "department": "Business",
+      "credits": 3,
+      "description": "Analytics decision frameworks and dashboards.",
+      "facultyIds": [2],
+      "metadata": [{ "key": "Delivery", "value": "Hybrid" }],
+      "createdAt": "2024-07-12T09:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "code": "BIO-150",
+      "title": "Molecular Biology",
+      "department": "Biology",
+      "credits": 4,
+      "description": "Cellular processes and lab techniques.",
+      "facultyIds": [3],
+      "metadata": [{ "key": "Lab", "value": "Required" }],
+      "createdAt": "2024-07-14T09:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "code": "MATH-210",
+      "title": "Statistical Modeling",
+      "department": "Mathematics",
+      "credits": 4,
+      "description": "Regression, probability, and inference.",
+      "facultyIds": [4],
+      "metadata": [{ "key": "Software", "value": "R" }],
+      "createdAt": "2024-07-16T09:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "code": "HIST-110",
+      "title": "Modern World History",
+      "department": "History",
+      "credits": 3,
+      "description": "Global events since 1900.",
+      "facultyIds": [5],
+      "metadata": [{ "key": "Archive", "value": "Primary sources" }],
+      "createdAt": "2024-07-18T09:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "code": "ENG-201",
+      "title": "Narrative Writing",
+      "department": "English",
+      "credits": 3,
+      "description": "Creative nonfiction and editorial workshops.",
+      "facultyIds": [5],
+      "metadata": [{ "key": "Workshop", "value": "Weekly" }],
+      "createdAt": "2024-07-20T09:00:00.000Z"
+    }
+  ],
+  "faculty": [
+    {
+      "id": 1,
+      "name": "Dr. Riley Park",
+      "email": "riley.park@northbridge.edu",
+      "department": "Computer Science",
+      "title": "Professor"
+    },
+    {
+      "id": 2,
+      "name": "Prof. Amara Singh",
+      "email": "amara.singh@northbridge.edu",
+      "department": "Business",
+      "title": "Associate Professor"
+    },
+    {
+      "id": 3,
+      "name": "Dr. Mateo Alvarez",
+      "email": "mateo.alvarez@northbridge.edu",
+      "department": "Biology",
+      "title": "Professor"
+    },
+    {
+      "id": 4,
+      "name": "Dr. Helen Brooks",
+      "email": "helen.brooks@northbridge.edu",
+      "department": "Mathematics",
+      "title": "Professor"
+    },
+    {
+      "id": 5,
+      "name": "Dr. Nia Carter",
+      "email": "nia.carter@northbridge.edu",
+      "department": "Humanities",
+      "title": "Senior Lecturer"
+    }
+  ],
+  "grades": [
+    {
+      "id": 1,
+      "studentId": 1,
+      "courseId": 1,
+      "score": 94,
+      "letter": "A",
+      "createdAt": "2024-09-10T12:00:00.000Z",
+      "updatedAt": "2024-10-10T12:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "studentId": 1,
+      "courseId": 4,
+      "score": 88,
+      "letter": "B+",
+      "createdAt": "2024-09-05T12:00:00.000Z",
+      "updatedAt": "2024-10-05T12:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "studentId": 2,
+      "courseId": 2,
+      "score": 91,
+      "letter": "A-",
+      "createdAt": "2024-09-14T12:00:00.000Z",
+      "updatedAt": "2024-10-14T12:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "studentId": 2,
+      "courseId": 4,
+      "score": 82,
+      "letter": "B-",
+      "createdAt": "2024-09-11T12:00:00.000Z",
+      "updatedAt": "2024-10-11T12:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "studentId": 3,
+      "courseId": 3,
+      "score": 95,
+      "letter": "A",
+      "createdAt": "2024-09-09T12:00:00.000Z",
+      "updatedAt": "2024-10-09T12:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "studentId": 3,
+      "courseId": 5,
+      "score": 87,
+      "letter": "B+",
+      "createdAt": "2024-09-19T12:00:00.000Z",
+      "updatedAt": "2024-10-19T12:00:00.000Z"
+    },
+    {
+      "id": 7,
+      "studentId": 4,
+      "courseId": 5,
+      "score": 78,
+      "letter": "C+",
+      "createdAt": "2024-10-02T12:00:00.000Z",
+      "updatedAt": "2024-11-02T12:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "studentId": 4,
+      "courseId": 6,
+      "score": 85,
+      "letter": "B",
+      "createdAt": "2024-10-05T12:00:00.000Z",
+      "updatedAt": "2024-11-05T12:00:00.000Z"
+    },
+    {
+      "id": 9,
+      "studentId": 5,
+      "courseId": 4,
+      "score": 96,
+      "letter": "A",
+      "createdAt": "2024-09-20T12:00:00.000Z",
+      "updatedAt": "2024-10-20T12:00:00.000Z"
+    },
+    {
+      "id": 10,
+      "studentId": 5,
+      "courseId": 1,
+      "score": 89,
+      "letter": "B+",
+      "createdAt": "2024-09-22T12:00:00.000Z",
+      "updatedAt": "2024-10-22T12:00:00.000Z"
+    },
+    {
+      "id": 11,
+      "studentId": 6,
+      "courseId": 5,
+      "score": 92,
+      "letter": "A-",
+      "createdAt": "2024-09-25T12:00:00.000Z",
+      "updatedAt": "2024-10-25T12:00:00.000Z"
+    },
+    {
+      "id": 12,
+      "studentId": 6,
+      "courseId": 2,
+      "score": 84,
+      "letter": "B",
+      "createdAt": "2024-10-01T12:00:00.000Z",
+      "updatedAt": "2024-11-01T12:00:00.000Z"
+    },
+    {
+      "id": 13,
+      "studentId": 7,
+      "courseId": 2,
+      "score": 88,
+      "letter": "B+",
+      "createdAt": "2024-10-03T12:00:00.000Z",
+      "updatedAt": "2024-11-03T12:00:00.000Z"
+    },
+    {
+      "id": 14,
+      "studentId": 7,
+      "courseId": 4,
+      "score": 81,
+      "letter": "B-",
+      "createdAt": "2024-10-06T12:00:00.000Z",
+      "updatedAt": "2024-11-06T12:00:00.000Z"
+    },
+    {
+      "id": 15,
+      "studentId": 8,
+      "courseId": 1,
+      "score": 93,
+      "letter": "A",
+      "createdAt": "2024-10-12T12:00:00.000Z",
+      "updatedAt": "2024-11-12T12:00:00.000Z"
+    },
+    {
+      "id": 16,
+      "studentId": 8,
+      "courseId": 2,
+      "score": 90,
+      "letter": "A-",
+      "createdAt": "2024-10-15T12:00:00.000Z",
+      "updatedAt": "2024-11-15T12:00:00.000Z"
+    },
+    {
+      "id": 17,
+      "studentId": 9,
+      "courseId": 3,
+      "score": 86,
+      "letter": "B",
+      "createdAt": "2024-10-18T12:00:00.000Z",
+      "updatedAt": "2024-11-18T12:00:00.000Z"
+    },
+    {
+      "id": 18,
+      "studentId": 9,
+      "courseId": 6,
+      "score": 91,
+      "letter": "A-",
+      "createdAt": "2024-10-21T12:00:00.000Z",
+      "updatedAt": "2024-11-21T12:00:00.000Z"
+    },
+    {
+      "id": 19,
+      "studentId": 10,
+      "courseId": 6,
+      "score": 88,
+      "letter": "B+",
+      "createdAt": "2024-10-25T12:00:00.000Z",
+      "updatedAt": "2024-11-25T12:00:00.000Z"
+    },
+    {
+      "id": 20,
+      "studentId": 10,
+      "courseId": 5,
+      "score": 79,
+      "letter": "C+",
+      "createdAt": "2024-10-28T12:00:00.000Z",
+      "updatedAt": "2024-11-28T12:00:00.000Z"
+    }
+  ]
+}
