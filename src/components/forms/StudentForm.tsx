@@ -12,10 +12,16 @@ import { Textarea } from "@/components/ui/Textarea";
 import { cn } from "@/lib/utils";
 
 const gradeSchema = z.object({
-  courseId: z.preprocess((value) => Number(value), z.number().min(1, "Select a course")),
+  courseId: z.preprocess(
+    (value) => Number(value),
+    z.number().min(1, "Select a course"),
+  ),
   score: z.preprocess(
     (value) => (value === "" || value === null ? undefined : Number(value)),
-    z.number().min(0, "Score must be at least 0").max(100, "Score must be <= 100"),
+    z
+      .number()
+      .min(0, "Score must be at least 0")
+      .max(100, "Score must be <= 100"),
   ),
 });
 
@@ -75,42 +81,69 @@ export function StudentForm({
   const attributes = useFieldArray({ control, name: "attributes" });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={cn("space-y-6", className)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={cn("space-y-6", className)}
+    >
       <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <label className="text-sm font-medium text-slate-700">First name</label>
+          <label className="text-sm font-medium text-slate-700">
+            First name
+          </label>
           <Input {...register("firstName")} placeholder="Ava" />
-          {errors.firstName ? <p className="text-xs text-rose-600">{errors.firstName.message}</p> : null}
+          {errors.firstName ? (
+            <p className="text-xs text-rose-600">{errors.firstName.message}</p>
+          ) : null}
         </div>
         <div>
-          <label className="text-sm font-medium text-slate-700">Last name</label>
+          <label className="text-sm font-medium text-slate-700">
+            Last name
+          </label>
           <Input {...register("lastName")} placeholder="Henderson" />
-          {errors.lastName ? <p className="text-xs text-rose-600">{errors.lastName.message}</p> : null}
+          {errors.lastName ? (
+            <p className="text-xs text-rose-600">{errors.lastName.message}</p>
+          ) : null}
         </div>
         <div>
           <label className="text-sm font-medium text-slate-700">Email</label>
-          <Input type="email" {...register("email")} placeholder="ava@university.edu" />
-          {errors.email ? <p className="text-xs text-rose-600">{errors.email.message}</p> : null}
+          <Input
+            type="email"
+            {...register("email")}
+            placeholder="ava@university.edu"
+          />
+          {errors.email ? (
+            <p className="text-xs text-rose-600">{errors.email.message}</p>
+          ) : null}
         </div>
         <div>
           <label className="text-sm font-medium text-slate-700">Year</label>
           <Select {...register("year")}>
-            {["Freshman", "Sophomore", "Junior", "Senior", "Graduate"].map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
+            {["Freshman", "Sophomore", "Junior", "Senior", "Graduate"].map(
+              (year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ),
+            )}
           </Select>
-          {errors.year ? <p className="text-xs text-rose-600">{errors.year.message}</p> : null}
+          {errors.year ? (
+            <p className="text-xs text-rose-600">{errors.year.message}</p>
+          ) : null}
         </div>
         <div>
           <label className="text-sm font-medium text-slate-700">Major</label>
           <Input {...register("major")} placeholder="Computer Science" />
-          {errors.major ? <p className="text-xs text-rose-600">{errors.major.message}</p> : null}
+          {errors.major ? (
+            <p className="text-xs text-rose-600">{errors.major.message}</p>
+          ) : null}
         </div>
         <div>
           <label className="text-sm font-medium text-slate-700">Notes</label>
-          <Textarea rows={3} {...register("notes")} placeholder="Optional student notes" />
+          <Textarea
+            rows={3}
+            {...register("notes")}
+            placeholder="Optional student notes"
+          />
         </div>
       </div>
 
@@ -118,7 +151,9 @@ export function StudentForm({
         <div className="flex items-center justify-between">
           <div>
             <h4 className="text-base font-semibold text-slate-900">Grades</h4>
-            <p className="text-xs text-slate-500">Add one or more grades for enrolled courses.</p>
+            <p className="text-xs text-slate-500">
+              Add one or more grades for enrolled courses.
+            </p>
           </div>
           <Button
             type="button"
@@ -135,10 +170,15 @@ export function StudentForm({
         </div>
 
         <div className="mt-4 space-y-3">
-          {grades.fields.length === 0 ? <p className="text-sm text-slate-500">No grades added yet.</p> : null}
+          {grades.fields.length === 0 ? (
+            <p className="text-sm text-slate-500">No grades added yet.</p>
+          ) : null}
 
           {grades.fields.map((field, index) => (
-            <div key={field.id} className="grid gap-3 md:grid-cols-[2fr_1fr_auto]">
+            <div
+              key={field.id}
+              className="grid gap-3 md:grid-cols-[2fr_1fr_auto]"
+            >
               <div>
                 <Select {...register(`grades.${index}.courseId` as const)}>
                   <option value="">Select course</option>
@@ -149,16 +189,30 @@ export function StudentForm({
                   ))}
                 </Select>
                 {errors.grades?.[index]?.courseId ? (
-                  <p className="text-xs text-rose-600">{errors.grades[index]?.courseId?.message}</p>
+                  <p className="text-xs text-rose-600">
+                    {errors.grades[index]?.courseId?.message}
+                  </p>
                 ) : null}
               </div>
               <div>
-                <Input type="number" min={0} max={100} step={1} {...register(`grades.${index}.score` as const)} />
+                <Input
+                  type="number"
+                  min={0}
+                  max={100}
+                  step={1}
+                  {...register(`grades.${index}.score` as const)}
+                />
                 {errors.grades?.[index]?.score ? (
-                  <p className="text-xs text-rose-600">{errors.grades[index]?.score?.message}</p>
+                  <p className="text-xs text-rose-600">
+                    {errors.grades[index]?.score?.message}
+                  </p>
                 ) : null}
               </div>
-              <Button type="button" variant="ghost" onClick={() => grades.remove(index)}>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => grades.remove(index)}
+              >
                 Remove
               </Button>
             </div>
@@ -169,34 +223,61 @@ export function StudentForm({
       <div className="rounded-2xl border border-slate-200 bg-white p-4">
         <div className="flex items-center justify-between">
           <div>
-            <h4 className="text-base font-semibold text-slate-900">Custom Attributes</h4>
-            <p className="text-xs text-slate-500">Track scholarships, mentors, or custom tags.</p>
+            <h4 className="text-base font-semibold text-slate-900">
+              Custom Attributes
+            </h4>
+            <p className="text-xs text-slate-500">
+              Track scholarships, mentors, or custom tags.
+            </p>
           </div>
-          <Button type="button" variant="outline" onClick={() => attributes.append({ key: "", value: "" })}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => attributes.append({ key: "", value: "" })}
+          >
             + Add attribute
           </Button>
         </div>
 
         <div className="mt-4 space-y-3">
           {attributes.fields.length === 0 ? (
-            <p className="text-sm text-slate-500">No custom attributes added.</p>
+            <p className="text-sm text-slate-500">
+              No custom attributes added.
+            </p>
           ) : null}
 
           {attributes.fields.map((field, index) => (
-            <div key={field.id} className="grid gap-3 md:grid-cols-[1fr_1fr_auto]">
+            <div
+              key={field.id}
+              className="grid gap-3 md:grid-cols-[1fr_1fr_auto]"
+            >
               <div>
-                <Input {...register(`attributes.${index}.key` as const)} placeholder="Attribute" />
+                <Input
+                  {...register(`attributes.${index}.key` as const)}
+                  placeholder="Attribute"
+                />
                 {errors.attributes?.[index]?.key ? (
-                  <p className="text-xs text-rose-600">{errors.attributes[index]?.key?.message}</p>
+                  <p className="text-xs text-rose-600">
+                    {errors.attributes[index]?.key?.message}
+                  </p>
                 ) : null}
               </div>
               <div>
-                <Input {...register(`attributes.${index}.value` as const)} placeholder="Value" />
+                <Input
+                  {...register(`attributes.${index}.value` as const)}
+                  placeholder="Value"
+                />
                 {errors.attributes?.[index]?.value ? (
-                  <p className="text-xs text-rose-600">{errors.attributes[index]?.value?.message}</p>
+                  <p className="text-xs text-rose-600">
+                    {errors.attributes[index]?.value?.message}
+                  </p>
                 ) : null}
               </div>
-              <Button type="button" variant="ghost" onClick={() => attributes.remove(index)}>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => attributes.remove(index)}
+              >
                 Remove
               </Button>
             </div>

@@ -39,7 +39,10 @@ export default function ReportsPage() {
     load();
   }, []);
 
-  const enrollmentSeries = useMemo(() => groupEnrollmentsByMonth(grades), [grades]);
+  const enrollmentSeries = useMemo(
+    () => groupEnrollmentsByMonth(grades),
+    [grades],
+  );
 
   const topStudentsOverall = useMemo(() => {
     const gradesByStudent = new Map<number, Grade[]>();
@@ -61,7 +64,9 @@ export default function ReportsPage() {
   const topStudentsByCourse = useMemo(() => {
     return courses
       .map((course) => {
-        const courseGrades = grades.filter((grade) => grade.courseId === course.id);
+        const courseGrades = grades.filter(
+          (grade) => grade.courseId === course.id,
+        );
         if (courseGrades.length === 0) {
           return null;
         }
@@ -74,7 +79,12 @@ export default function ReportsPage() {
           score: topGrade.score,
         };
       })
-      .filter(Boolean) as { course: string; code: string; student: string; score: number }[];
+      .filter(Boolean) as {
+      course: string;
+      code: string;
+      student: string;
+      score: number;
+    }[];
   }, [courses, grades, students]);
 
   const handleExportEnrollments = () => {
@@ -104,9 +114,21 @@ export default function ReportsPage() {
       <PageHeader title="Reporting & Export" />
 
       <div className="grid gap-4 md:grid-cols-3">
-        <StatCard title="Total Enrollments" value={grades.length} description="Across all courses" />
-        <StatCard title="Active Courses" value={courses.length} description="Catalog coverage" />
-        <StatCard title="Top Students" value={topStudentsOverall.length} description="Highlighted this term" />
+        <StatCard
+          title="Total Enrollments"
+          value={grades.length}
+          description="Across all courses"
+        />
+        <StatCard
+          title="Active Courses"
+          value={courses.length}
+          description="Catalog coverage"
+        />
+        <StatCard
+          title="Top Students"
+          value={topStudentsOverall.length}
+          description="Highlighted this term"
+        />
       </div>
 
       <Card>
@@ -125,7 +147,9 @@ export default function ReportsPage() {
               data={enrollmentSeries.map((entry) => entry.count)}
             />
           ) : (
-            <p className="text-sm text-slate-500">No enrollment history available.</p>
+            <p className="text-sm text-slate-500">
+              No enrollment history available.
+            </p>
           )}
         </CardContent>
       </Card>
@@ -143,9 +167,14 @@ export default function ReportsPage() {
           <CardContent>
             <div className="space-y-3">
               {topStudentsByCourse.map((entry) => (
-                <div key={entry.code} className="flex items-center justify-between">
+                <div
+                  key={entry.code}
+                  className="flex items-center justify-between"
+                >
                   <div>
-                    <p className="text-sm font-medium text-slate-900">{entry.course}</p>
+                    <p className="text-sm font-medium text-slate-900">
+                      {entry.course}
+                    </p>
                     <p className="text-xs text-slate-500">{entry.student}</p>
                   </div>
                   <Badge>{entry.score}%</Badge>
@@ -162,14 +191,19 @@ export default function ReportsPage() {
           <CardContent>
             <div className="space-y-3">
               {topStudentsOverall.map(({ student, gpa }, index) => (
-                <div key={student.id} className="flex items-center justify-between">
+                <div
+                  key={student.id}
+                  className="flex items-center justify-between"
+                >
                   <div>
                     <p className="text-sm font-medium text-slate-900">
                       #{index + 1} {formatStudentName(student)}
                     </p>
                     <p className="text-xs text-slate-500">{student.major}</p>
                   </div>
-                  <Badge className="bg-indigo-100 text-indigo-700">{gpa.toFixed(2)} GPA</Badge>
+                  <Badge className="bg-indigo-100 text-indigo-700">
+                    {gpa.toFixed(2)} GPA
+                  </Badge>
                 </div>
               ))}
             </div>

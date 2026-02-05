@@ -6,7 +6,13 @@ import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { StatCard } from "@/components/ui/StatCard";
 import { academicApi } from "@/services/academic-api";
@@ -65,7 +71,10 @@ export default function CoursesPage() {
 
   const totalPages = Math.max(1, Math.ceil(filteredCourses.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
-  const paginated = filteredCourses.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const paginated = filteredCourses.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
+  );
 
   useEffect(() => {
     setPage(1);
@@ -83,8 +92,12 @@ export default function CoursesPage() {
 
     try {
       await academicApi.deleteCourse(courseId);
-      const relatedGrades = previousGrades.filter((grade) => grade.courseId === courseId);
-      await Promise.all(relatedGrades.map((grade) => academicApi.deleteGrade(grade.id)));
+      const relatedGrades = previousGrades.filter(
+        (grade) => grade.courseId === courseId,
+      );
+      await Promise.all(
+        relatedGrades.map((grade) => academicApi.deleteGrade(grade.id)),
+      );
     } catch (error) {
       console.error(error);
       setCourses(previousCourses);
@@ -111,29 +124,51 @@ export default function CoursesPage() {
       />
 
       <div className="grid gap-4 md:grid-cols-3">
-        <StatCard title="Courses" value={courses.length} description="Catalog size" />
-        <StatCard title="Enrollments" value={grades.length} description="Active course registrations" />
-        <StatCard title="Faculty" value={faculty.length} description="Teaching staff available" />
+        <StatCard
+          title="Courses"
+          value={courses.length}
+          description="Catalog size"
+        />
+        <StatCard
+          title="Enrollments"
+          value={grades.length}
+          description="Active course registrations"
+        />
+        <StatCard
+          title="Faculty"
+          value={faculty.length}
+          description="Teaching staff available"
+        />
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle>Search Courses</CardTitle>
-          <CardDescription>Filter by title, code, or department.</CardDescription>
+          <CardDescription>
+            Filter by title, code, or department.
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <Input placeholder="Search courses" value={search} onChange={(event) => setSearch(event.target.value)} />
+          <Input
+            placeholder="Search courses"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
           <CardTitle>Course Directory</CardTitle>
-          <CardDescription>Review assignments and enrollments for each course.</CardDescription>
+          <CardDescription>
+            Review assignments and enrollments for each course.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {paginated.length === 0 ? (
-            <div className="py-8 text-center text-sm text-slate-500">No courses match your search.</div>
+            <div className="py-8 text-center text-sm text-slate-500">
+              No courses match your search.
+            </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
@@ -156,17 +191,28 @@ export default function CoursesPage() {
                     return (
                       <tr key={course.id}>
                         <td className="py-3">
-                          <p className="font-medium text-slate-900">{course.title}</p>
-                          <p className="text-xs text-slate-500">{course.code}</p>
+                          <p className="font-medium text-slate-900">
+                            {course.title}
+                          </p>
+                          <p className="text-xs text-slate-500">
+                            {course.code}
+                          </p>
                         </td>
-                        <td className="py-3 text-slate-500">{course.department}</td>
-                        <td className="py-3 text-slate-500">{facultyNames.length ? facultyNames : "Unassigned"}</td>
+                        <td className="py-3 text-slate-500">
+                          {course.department}
+                        </td>
+                        <td className="py-3 text-slate-500">
+                          {facultyNames.length ? facultyNames : "Unassigned"}
+                        </td>
                         <td className="py-3">
                           <Badge>{count} enrolled</Badge>
                         </td>
                         <td className="py-3 text-right">
                           <div className="flex justify-end gap-2">
-                            <Link className="text-slate-500 hover:text-slate-700" href={`/courses/${course.id}/edit`}>
+                            <Link
+                              className="text-slate-500 hover:text-slate-700"
+                              href={`/courses/${course.id}/edit`}
+                            >
                               Edit
                             </Link>
                             <button
@@ -191,17 +237,26 @@ export default function CoursesPage() {
       {filteredCourses.length > 0 ? (
         <div className="flex items-center justify-between">
           <p className="text-xs text-slate-500">
-            Showing {(currentPage - 1) * PAGE_SIZE + 1}–{Math.min(currentPage * PAGE_SIZE, filteredCourses.length)} of{" "}
+            Showing {(currentPage - 1) * PAGE_SIZE + 1}–
+            {Math.min(currentPage * PAGE_SIZE, filteredCourses.length)} of{" "}
             {filteredCourses.length} courses
           </p>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" onClick={() => setPage((prev) => Math.max(1, prev - 1))}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+            >
               Previous
             </Button>
             <span className="text-xs text-slate-500">
               Page {currentPage} of {totalPages}
             </span>
-            <Button variant="outline" size="sm" onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+            >
               Next
             </Button>
           </div>

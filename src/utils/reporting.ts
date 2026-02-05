@@ -1,7 +1,10 @@
 import type { Grade } from "@/types/academic";
 
 export function groupEnrollmentsByMonth(grades: Grade[]) {
-  const formatter = new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" });
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    year: "numeric",
+  });
   const tally = new Map<string, number>();
 
   grades.forEach((grade) => {
@@ -11,5 +14,8 @@ export function groupEnrollmentsByMonth(grades: Grade[]) {
 
   return Array.from(tally.entries())
     .map(([label, count]) => ({ label, count }))
-    .sort((a, b) => new Date(`1 ${a.label}`).getTime() - new Date(`1 ${b.label}`).getTime());
+    .sort(
+      (a, b) =>
+        new Date(`1 ${a.label}`).getTime() - new Date(`1 ${b.label}`).getTime(),
+    );
 }

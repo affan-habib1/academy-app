@@ -1,4 +1,10 @@
-import { LayoutDashboard, Users, BookOpen, GraduationCap, ClipboardList } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  BookOpen,
+  GraduationCap,
+  ClipboardList,
+} from "lucide-react";
 
 export const NAV_ITEMS = [
   { label: "Dashboard", href: "/", icon: LayoutDashboard },

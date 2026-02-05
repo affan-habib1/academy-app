@@ -3,7 +3,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-import { CourseForm, type CourseFormValues } from "@/components/forms/CourseForm";
+import {
+  CourseForm,
+  type CourseFormValues,
+} from "@/components/forms/CourseForm";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardContent } from "@/components/ui/Card";
 import { academicApi } from "@/services/academic-api";

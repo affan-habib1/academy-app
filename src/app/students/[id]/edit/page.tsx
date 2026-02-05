@@ -4,7 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import { PageHeader } from "@/components/layout/PageHeader";
-import { StudentForm, type StudentFormValues } from "@/components/forms/StudentForm";
+import {
+  StudentForm,
+  type StudentFormValues,
+} from "@/components/forms/StudentForm";
 import { Card, CardContent } from "@/components/ui/Card";
 import { academicApi } from "@/services/academic-api";
 import type { Course, Grade, Student } from "@/types/academic";
@@ -68,7 +71,9 @@ export default function EditStudentPage() {
     });
 
     const existingGrades = await academicApi.getGradesByStudent(studentId);
-    await Promise.all(existingGrades.map((grade) => academicApi.deleteGrade(grade.id)));
+    await Promise.all(
+      existingGrades.map((grade) => academicApi.deleteGrade(grade.id)),
+    );
 
     if (values.grades?.length) {
       await Promise.all(
@@ -89,7 +94,9 @@ export default function EditStudentPage() {
   };
 
   if (loading || !defaultValues) {
-    return <div className="text-sm text-slate-500">Loading student record...</div>;
+    return (
+      <div className="text-sm text-slate-500">Loading student record...</div>
+    );
   }
 
   return (

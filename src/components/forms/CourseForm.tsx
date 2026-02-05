@@ -12,7 +12,10 @@ import { Textarea } from "@/components/ui/Textarea";
 import { cn } from "@/lib/utils";
 
 const instructorSchema = z.object({
-  facultyId: z.preprocess((value) => Number(value), z.number().min(1, "Select a faculty member")),
+  facultyId: z.preprocess(
+    (value) => Number(value),
+    z.number().min(1, "Select a faculty member"),
+  ),
 });
 
 const metadataSchema = z.object({
@@ -26,7 +29,10 @@ const courseSchema = z.object({
   department: z.string().min(1, "Department is required"),
   credits: z.preprocess(
     (value) => Number(value),
-    z.number().min(1, "Credits must be at least 1").max(10, "Credits must be <= 10"),
+    z
+      .number()
+      .min(1, "Credits must be at least 1")
+      .max(10, "Credits must be <= 10"),
   ),
   description: z.string().optional(),
   instructors: z.array(instructorSchema).default([]),
@@ -72,44 +78,74 @@ export function CourseForm({
   const metadata = useFieldArray({ control, name: "metadata" });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={cn("space-y-6", className)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={cn("space-y-6", className)}
+    >
       <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <label className="text-sm font-medium text-slate-700">Course code</label>
+          <label className="text-sm font-medium text-slate-700">
+            Course code
+          </label>
           <Input {...register("code")} placeholder="CS-320" />
-          {errors.code ? <p className="text-xs text-rose-600">{errors.code.message}</p> : null}
+          {errors.code ? (
+            <p className="text-xs text-rose-600">{errors.code.message}</p>
+          ) : null}
         </div>
         <div>
           <label className="text-sm font-medium text-slate-700">Title</label>
-          <Input {...register("title")} placeholder="Applied Machine Learning" />
-          {errors.title ? <p className="text-xs text-rose-600">{errors.title.message}</p> : null}
+          <Input
+            {...register("title")}
+            placeholder="Applied Machine Learning"
+          />
+          {errors.title ? (
+            <p className="text-xs text-rose-600">{errors.title.message}</p>
+          ) : null}
         </div>
         <div>
-          <label className="text-sm font-medium text-slate-700">Department</label>
+          <label className="text-sm font-medium text-slate-700">
+            Department
+          </label>
           <Input {...register("department")} placeholder="Computer Science" />
-          {errors.department ? <p className="text-xs text-rose-600">{errors.department.message}</p> : null}
+          {errors.department ? (
+            <p className="text-xs text-rose-600">{errors.department.message}</p>
+          ) : null}
         </div>
         <div>
           <label className="text-sm font-medium text-slate-700">Credits</label>
           <Input type="number" min={1} max={10} {...register("credits")} />
-          {errors.credits ? <p className="text-xs text-rose-600">{errors.credits.message}</p> : null}
+          {errors.credits ? (
+            <p className="text-xs text-rose-600">{errors.credits.message}</p>
+          ) : null}
         </div>
         <div className="md:col-span-2">
-          <label className="text-sm font-medium text-slate-700">Description</label>
-          <Textarea rows={3} {...register("description")} placeholder="Optional course description" />
+          <label className="text-sm font-medium text-slate-700">
+            Description
+          </label>
+          <Textarea
+            rows={3}
+            {...register("description")}
+            placeholder="Optional course description"
+          />
         </div>
       </div>
 
       <div className="rounded-2xl border border-slate-200 bg-white p-4">
         <div className="flex items-center justify-between">
           <div>
-            <h4 className="text-base font-semibold text-slate-900">Instructors</h4>
-            <p className="text-xs text-slate-500">Assign multiple faculty members to this course.</p>
+            <h4 className="text-base font-semibold text-slate-900">
+              Instructors
+            </h4>
+            <p className="text-xs text-slate-500">
+              Assign multiple faculty members to this course.
+            </p>
           </div>
           <Button
             type="button"
             variant="outline"
-            onClick={() => instructors.append({ facultyId: faculty[0]?.id ?? 0 })}
+            onClick={() =>
+              instructors.append({ facultyId: faculty[0]?.id ?? 0 })
+            }
           >
             + Add instructor
           </Button>
@@ -117,12 +153,16 @@ export function CourseForm({
 
         <div className="mt-4 space-y-3">
           {instructors.fields.length === 0 ? (
-            <p className="text-sm text-slate-500">No instructors assigned yet.</p>
+            <p className="text-sm text-slate-500">
+              No instructors assigned yet.
+            </p>
           ) : null}
           {instructors.fields.map((field, index) => (
             <div key={field.id} className="grid gap-3 md:grid-cols-[1fr_auto]">
               <div>
-                <Select {...register(`instructors.${index}.facultyId` as const)}>
+                <Select
+                  {...register(`instructors.${index}.facultyId` as const)}
+                >
                   <option value="">Select faculty</option>
                   {faculty.map((member) => (
                     <option key={member.id} value={member.id}>
@@ -131,10 +171,16 @@ export function CourseForm({
                   ))}
                 </Select>
                 {errors.instructors?.[index]?.facultyId ? (
-                  <p className="text-xs text-rose-600">{errors.instructors[index]?.facultyId?.message}</p>
+                  <p className="text-xs text-rose-600">
+                    {errors.instructors[index]?.facultyId?.message}
+                  </p>
                 ) : null}
               </div>
-              <Button type="button" variant="ghost" onClick={() => instructors.remove(index)}>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => instructors.remove(index)}
+              >
                 Remove
               </Button>
             </div>
@@ -146,30 +192,55 @@ export function CourseForm({
         <div className="flex items-center justify-between">
           <div>
             <h4 className="text-base font-semibold text-slate-900">Metadata</h4>
-            <p className="text-xs text-slate-500">Add custom metadata fields for reporting.</p>
+            <p className="text-xs text-slate-500">
+              Add custom metadata fields for reporting.
+            </p>
           </div>
-          <Button type="button" variant="outline" onClick={() => metadata.append({ key: "", value: "" })}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => metadata.append({ key: "", value: "" })}
+          >
             + Add field
           </Button>
         </div>
 
         <div className="mt-4 space-y-3">
-          {metadata.fields.length === 0 ? <p className="text-sm text-slate-500">No metadata fields added.</p> : null}
+          {metadata.fields.length === 0 ? (
+            <p className="text-sm text-slate-500">No metadata fields added.</p>
+          ) : null}
           {metadata.fields.map((field, index) => (
-            <div key={field.id} className="grid gap-3 md:grid-cols-[1fr_1fr_auto]">
+            <div
+              key={field.id}
+              className="grid gap-3 md:grid-cols-[1fr_1fr_auto]"
+            >
               <div>
-                <Input {...register(`metadata.${index}.key` as const)} placeholder="Field name" />
+                <Input
+                  {...register(`metadata.${index}.key` as const)}
+                  placeholder="Field name"
+                />
                 {errors.metadata?.[index]?.key ? (
-                  <p className="text-xs text-rose-600">{errors.metadata[index]?.key?.message}</p>
+                  <p className="text-xs text-rose-600">
+                    {errors.metadata[index]?.key?.message}
+                  </p>
                 ) : null}
               </div>
               <div>
-                <Input {...register(`metadata.${index}.value` as const)} placeholder="Field value" />
+                <Input
+                  {...register(`metadata.${index}.value` as const)}
+                  placeholder="Field value"
+                />
                 {errors.metadata?.[index]?.value ? (
-                  <p className="text-xs text-rose-600">{errors.metadata[index]?.value?.message}</p>
+                  <p className="text-xs text-rose-600">
+                    {errors.metadata[index]?.value?.message}
+                  </p>
                 ) : null}
               </div>
-              <Button type="button" variant="ghost" onClick={() => metadata.remove(index)}>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => metadata.remove(index)}
+              >
                 Remove
               </Button>
             </div>

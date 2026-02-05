@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { PageHeader } from "@/components/layout/PageHeader";
-import { StudentForm, type StudentFormValues } from "@/components/forms/StudentForm";
+import {
+  StudentForm,
+  type StudentFormValues,
+} from "@/components/forms/StudentForm";
 import { Card, CardContent } from "@/components/ui/Card";
 import { academicApi } from "@/services/academic-api";
 import type { Course, Student } from "@/types/academic";
@@ -62,7 +65,9 @@ export default function NewStudentPage() {
   };
 
   if (loading) {
-    return <div className="text-sm text-slate-500">Loading course catalog...</div>;
+    return (
+      <div className="text-sm text-slate-500">Loading course catalog...</div>
+    );
   }
 
   return (
@@ -70,7 +75,11 @@ export default function NewStudentPage() {
       <PageHeader title="Create Student" />
       <Card>
         <CardContent>
-          <StudentForm courses={courses} submitLabel="Create student" onSubmit={handleSubmit} />
+          <StudentForm
+            courses={courses}
+            submitLabel="Create student"
+            onSubmit={handleSubmit}
+          />
         </CardContent>
       </Card>
     </div>

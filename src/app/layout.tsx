@@ -17,10 +17,15 @@ const interTight = Inter_Tight({
 
 export const metadata: Metadata = {
   title: "Academic Management Dashboard",
-  description: "Academic management dashboard for students, courses, faculty, and reporting.",
+  description:
+    "Academic management dashboard for students, courses, faculty, and reporting.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className={`${albertSans.variable} ${interTight.variable}`}>

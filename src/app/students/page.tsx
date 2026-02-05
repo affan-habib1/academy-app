@@ -6,7 +6,13 @@ import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { StatCard } from "@/components/ui/StatCard";
@@ -59,18 +65,27 @@ export default function StudentsPage() {
     const query = search.toLowerCase();
     return students.filter((student) => {
       const matchesSearch =
-        formatStudentName(student).toLowerCase().includes(query) || student.email.toLowerCase().includes(query);
+        formatStudentName(student).toLowerCase().includes(query) ||
+        student.email.toLowerCase().includes(query);
       const matchesYear = yearFilter === "all" || student.year === yearFilter;
       const matchesCourse =
         courseFilter === "all" ||
-        (gradesByStudent.get(student.id) ?? []).some((grade) => String(grade.courseId) === courseFilter);
+        (gradesByStudent.get(student.id) ?? []).some(
+          (grade) => String(grade.courseId) === courseFilter,
+        );
       return matchesSearch && matchesYear && matchesCourse;
     });
   }, [students, search, yearFilter, courseFilter, gradesByStudent]);
 
-  const totalPages = Math.max(1, Math.ceil(filteredStudents.length / PAGE_SIZE));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredStudents.length / PAGE_SIZE),
+  );
   const currentPage = Math.min(page, totalPages);
-  const paginated = filteredStudents.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const paginated = filteredStudents.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
+  );
 
   useEffect(() => {
     setPage(1);
@@ -88,8 +103,12 @@ export default function StudentsPage() {
 
     try {
       await academicApi.deleteStudent(studentId);
-      const studentGrades = previousGrades.filter((grade) => grade.studentId === studentId);
-      await Promise.all(studentGrades.map((grade) => academicApi.deleteGrade(grade.id)));
+      const studentGrades = previousGrades.filter(
+        (grade) => grade.studentId === studentId,
+      );
+      await Promise.all(
+        studentGrades.map((grade) => academicApi.deleteGrade(grade.id)),
+      );
     } catch (error) {
       console.error(error);
       setStudents(previousStudents);
@@ -116,15 +135,29 @@ export default function StudentsPage() {
       />
 
       <div className="grid gap-4 md:grid-cols-3">
-        <StatCard title="All Students" value={students.length} description="Total records" />
-        <StatCard title="Filtered Results" value={filteredStudents.length} description="Matches current filters" />
-        <StatCard title="Active Enrollments" value={grades.length} description="Course registrations" />
+        <StatCard
+          title="All Students"
+          value={students.length}
+          description="Total records"
+        />
+        <StatCard
+          title="Filtered Results"
+          value={filteredStudents.length}
+          description="Matches current filters"
+        />
+        <StatCard
+          title="Active Enrollments"
+          value={grades.length}
+          description="Course registrations"
+        />
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle>Search & Filters</CardTitle>
-          <CardDescription>Refine students by year and enrolled course.</CardDescription>
+          <CardDescription>
+            Refine students by year and enrolled course.
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-3 lg:grid-cols-[2fr_1fr_1fr]">
@@ -133,15 +166,23 @@ export default function StudentsPage() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
             />
-            <Select value={yearFilter} onChange={(event) => setYearFilter(event.target.value)}>
+            <Select
+              value={yearFilter}
+              onChange={(event) => setYearFilter(event.target.value)}
+            >
               <option value="all">All years</option>
-              {["Freshman", "Sophomore", "Junior", "Senior", "Graduate"].map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
+              {["Freshman", "Sophomore", "Junior", "Senior", "Graduate"].map(
+                (year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ),
+              )}
             </Select>
-            <Select value={courseFilter} onChange={(event) => setCourseFilter(event.target.value)}>
+            <Select
+              value={courseFilter}
+              onChange={(event) => setCourseFilter(event.target.value)}
+            >
               <option value="all">All courses</option>
               {courses.map((course) => (
                 <option key={course.id} value={course.id}>
@@ -156,11 +197,15 @@ export default function StudentsPage() {
       <Card>
         <CardHeader>
           <CardTitle>Student Directory</CardTitle>
-          <CardDescription>Click into a student profile to view grades and progress.</CardDescription>
+          <CardDescription>
+            Click into a student profile to view grades and progress.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {paginated.length === 0 ? (
-            <div className="py-8 text-center text-sm text-slate-500">No students match your filters.</div>
+            <div className="py-8 text-center text-sm text-slate-500">
+              No students match your filters.
+            </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
@@ -179,8 +224,12 @@ export default function StudentsPage() {
                     return (
                       <tr key={student.id}>
                         <td className="py-3">
-                          <p className="font-medium text-slate-900">{formatStudentName(student)}</p>
-                          <p className="text-xs text-slate-500">{student.email}</p>
+                          <p className="font-medium text-slate-900">
+                            {formatStudentName(student)}
+                          </p>
+                          <p className="text-xs text-slate-500">
+                            {student.email}
+                          </p>
                         </td>
                         <td className="py-3 text-slate-500">{student.year}</td>
                         <td className="py-3 text-slate-500">{student.major}</td>
@@ -189,10 +238,16 @@ export default function StudentsPage() {
                         </td>
                         <td className="py-3 text-right">
                           <div className="flex justify-end gap-2">
-                            <Link className="text-emerald-600 hover:text-emerald-700" href={`/students/${student.id}`}>
+                            <Link
+                              className="text-emerald-600 hover:text-emerald-700"
+                              href={`/students/${student.id}`}
+                            >
                               View
                             </Link>
-                            <Link className="text-slate-500 hover:text-slate-700" href={`/students/${student.id}/edit`}>
+                            <Link
+                              className="text-slate-500 hover:text-slate-700"
+                              href={`/students/${student.id}/edit`}
+                            >
                               Edit
                             </Link>
                             <button
@@ -216,17 +271,26 @@ export default function StudentsPage() {
 
       <div className="flex items-center justify-between">
         <p className="text-xs text-slate-500">
-          Showing {(currentPage - 1) * PAGE_SIZE + 1}–{Math.min(currentPage * PAGE_SIZE, filteredStudents.length)} of{" "}
+          Showing {(currentPage - 1) * PAGE_SIZE + 1}–
+          {Math.min(currentPage * PAGE_SIZE, filteredStudents.length)} of{" "}
           {filteredStudents.length} students
         </p>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={() => setPage((prev) => Math.max(1, prev - 1))}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+          >
             Previous
           </Button>
           <span className="text-xs text-slate-500">
             Page {currentPage} of {totalPages}
           </span>
-          <Button variant="outline" size="sm" onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+          >
             Next
           </Button>
         </div>

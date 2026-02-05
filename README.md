@@ -3,6 +3,7 @@
 A Next.js academic management dashboard for tracking student performance, course enrollment, faculty workflows, and reporting insights. The UI is optimized for administrators and faculty members with responsive layouts, reusable forms, and data-rich views.
 
 ## Features
+
 - **Dashboard** with summary cards, top students leaderboard, and enrollment analytics.
 - **Student management** with search, filters, pagination, and detailed profiles.
 - **Course management** with faculty assignments and enrollment counts.
@@ -11,6 +12,7 @@ A Next.js academic management dashboard for tracking student performance, course
 - **Mock API** powered by JSON Server with optimistic UI updates.
 
 ## Tech Stack
+
 - Next.js 15 (App Router)
 - TypeScript
 - Tailwind CSS
@@ -21,23 +23,29 @@ A Next.js academic management dashboard for tracking student performance, course
 ## Getting Started
 
 1. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 2. **Configure environment**
+
    ```bash
    cp .env.example .env.local
    ```
+
    Ensure the API base URL is set:
+
    ```bash
    NEXT_PUBLIC_API_BASE_URL=http://localhost:4000
    ```
 
 3. **Run the mock API + frontend**
+
    ```bash
    pnpm dev:all
    ```
+
    - Next.js runs on `http://localhost:3000`
    - JSON Server runs on `http://localhost:4000`
 
@@ -48,6 +56,7 @@ A Next.js academic management dashboard for tracking student performance, course
    ```
 
 ## Key Routes
+
 - `/` — Dashboard
 - `/students` — Student list
 - `/students/new` — Create student
@@ -60,6 +69,7 @@ A Next.js academic management dashboard for tracking student performance, course
 - `/reports` — Reports & CSV export
 
 ## Architecture Decisions
+
 - **Component structure**
   - `src/components/layout` for layout shell and headers
   - `src/components/forms` for reusable forms
@@ -77,11 +87,13 @@ A Next.js academic management dashboard for tracking student performance, course
   - No writes persist to `db.json`
 
 ## Scripts
+
 - `pnpm dev` — Start Next.js
 - `pnpm mock` — Start JSON Server (non-persistent)
 - `pnpm dev:all` — Run both together
 - `pnpm build` — Production build
 
 ## Notes
+
 - Data resets to the initial `mock/db.json` on browser refresh by design.
 - ApexCharts is loaded via dynamic import to avoid SSR issues.

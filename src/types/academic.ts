@@ -1,4 +1,9 @@
-export type AcademicYear = "Freshman" | "Sophomore" | "Junior" | "Senior" | "Graduate";
+export type AcademicYear =
+  | "Freshman"
+  | "Sophomore"
+  | "Junior"
+  | "Senior"
+  | "Graduate";
 
 export interface StudentAttribute {
   key: string;

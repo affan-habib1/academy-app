@@ -47,7 +47,10 @@ export default [
     rules: {
       "prettier/prettier": "warn",
       "import/order": "off",
-      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_" },
+      ],
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unnecessary-condition": "off",
       "@typescript-eslint/prefer-nullish-coalescing": "off",

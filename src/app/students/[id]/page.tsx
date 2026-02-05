@@ -5,7 +5,13 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 
 import { Badge } from "@/components/ui/Badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { academicApi } from "@/services/academic-api";
 import type { Course, Grade, Student } from "@/types/academic";
@@ -44,7 +50,9 @@ export default function StudentProfilePage() {
         grade,
         course: courses.find((course) => course.id === grade.courseId),
       }))
-      .filter((item): item is { grade: Grade; course: Course } => Boolean(item.course));
+      .filter((item): item is { grade: Grade; course: Course } =>
+        Boolean(item.course),
+      );
   }, [grades, courses]);
 
   const averageScore = useMemo(() => {
@@ -54,7 +62,9 @@ export default function StudentProfilePage() {
   }, [grades]);
 
   if (loading) {
-    return <div className="text-sm text-slate-500">Loading student profile...</div>;
+    return (
+      <div className="text-sm text-slate-500">Loading student profile...</div>
+    );
   }
 
   if (!student) {
@@ -87,22 +97,35 @@ export default function StudentProfilePage() {
         <Card>
           <CardHeader>
             <CardTitle>Enrollment Overview</CardTitle>
-            <CardDescription>Courses, grades, and progress snapshot.</CardDescription>
+            <CardDescription>
+              Courses, grades, and progress snapshot.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             {enrolledCourses.length === 0 ? (
-              <p className="text-sm text-slate-500">No course enrollments yet.</p>
+              <p className="text-sm text-slate-500">
+                No course enrollments yet.
+              </p>
             ) : (
               <div className="space-y-4">
                 {enrolledCourses.map(({ course, grade }) => (
-                  <div key={grade.id} className="flex items-center justify-between">
+                  <div
+                    key={grade.id}
+                    className="flex items-center justify-between"
+                  >
                     <div>
-                      <p className="text-sm font-medium text-slate-900">{course.title}</p>
+                      <p className="text-sm font-medium text-slate-900">
+                        {course.title}
+                      </p>
                       <p className="text-xs text-slate-500">{course.code}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-medium text-slate-900">{grade.score}%</p>
-                      <p className="text-xs text-slate-500">{scoreToLetter(grade.score)}</p>
+                      <p className="text-sm font-medium text-slate-900">
+                        {grade.score}%
+                      </p>
+                      <p className="text-xs text-slate-500">
+                        {scoreToLetter(grade.score)}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -119,19 +142,32 @@ export default function StudentProfilePage() {
           <CardContent>
             <div className="space-y-4">
               <div>
-                <p className="text-xs text-slate-400 uppercase">Average Score</p>
-                <p className="text-2xl font-semibold text-slate-900">{averageScore}%</p>
+                <p className="text-xs text-slate-400 uppercase">
+                  Average Score
+                </p>
+                <p className="text-2xl font-semibold text-slate-900">
+                  {averageScore}%
+                </p>
                 <div className="mt-2 h-2 w-full rounded-full bg-slate-100">
-                  <div className="h-2 rounded-full bg-emerald-500" style={{ width: `${averageScore}%` }} />
+                  <div
+                    className="h-2 rounded-full bg-emerald-500"
+                    style={{ width: `${averageScore}%` }}
+                  />
                 </div>
               </div>
               <div>
                 <p className="text-xs text-slate-400 uppercase">GPA</p>
-                <p className="text-2xl font-semibold text-slate-900">{calculateGpa(grades).toFixed(2)}</p>
+                <p className="text-2xl font-semibold text-slate-900">
+                  {calculateGpa(grades).toFixed(2)}
+                </p>
               </div>
               <div>
-                <p className="text-xs text-slate-400 uppercase">Courses Enrolled</p>
-                <p className="text-2xl font-semibold text-slate-900">{grades.length}</p>
+                <p className="text-xs text-slate-400 uppercase">
+                  Courses Enrolled
+                </p>
+                <p className="text-2xl font-semibold text-slate-900">
+                  {grades.length}
+                </p>
               </div>
             </div>
           </CardContent>
@@ -147,15 +183,21 @@ export default function StudentProfilePage() {
           <div className="grid gap-4 md:grid-cols-2">
             <div>
               <p className="text-xs text-slate-400 uppercase">Email</p>
-              <p className="text-sm font-medium text-slate-900">{student.email}</p>
+              <p className="text-sm font-medium text-slate-900">
+                {student.email}
+              </p>
             </div>
             <div>
               <p className="text-xs text-slate-400 uppercase">Academic Year</p>
-              <p className="text-sm font-medium text-slate-900">{student.year}</p>
+              <p className="text-sm font-medium text-slate-900">
+                {student.year}
+              </p>
             </div>
             <div>
               <p className="text-xs text-slate-400 uppercase">Major</p>
-              <p className="text-sm font-medium text-slate-900">{student.major}</p>
+              <p className="text-sm font-medium text-slate-900">
+                {student.major}
+              </p>
             </div>
             <div>
               <p className="text-xs text-slate-400 uppercase">Attributes</p>
@@ -167,7 +209,9 @@ export default function StudentProfilePage() {
                     </Badge>
                   ))
                 ) : (
-                  <span className="text-sm text-slate-500">No custom attributes</span>
+                  <span className="text-sm text-slate-500">
+                    No custom attributes
+                  </span>
                 )}
               </div>
             </div>

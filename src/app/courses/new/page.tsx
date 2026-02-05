@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { CourseForm, type CourseFormValues } from "@/components/forms/CourseForm";
+import {
+  CourseForm,
+  type CourseFormValues,
+} from "@/components/forms/CourseForm";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardContent } from "@/components/ui/Card";
 import { academicApi } from "@/services/academic-api";
@@ -53,7 +56,11 @@ export default function NewCoursePage() {
       <PageHeader title="Create Course" />
       <Card>
         <CardContent>
-          <CourseForm faculty={faculty} submitLabel="Create course" onSubmit={handleSubmit} />
+          <CourseForm
+            faculty={faculty}
+            submitLabel="Create course"
+            onSubmit={handleSubmit}
+          />
         </CardContent>
       </Card>
     </div>

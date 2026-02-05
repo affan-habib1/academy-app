@@ -6,7 +6,13 @@ import Link from "next/link";
 import { BookOpen, GraduationCap, Users } from "lucide-react";
 
 import { Badge } from "@/components/ui/Badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
 import { StatCard } from "@/components/ui/StatCard";
 import { EnrollmentBarChart } from "@/components/charts/EnrollmentBarChart";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -24,12 +30,13 @@ export default function DashboardPage() {
   useEffect(() => {
     const load = async () => {
       try {
-        const [studentsData, coursesData, facultyData, gradesData] = await Promise.all([
-          academicApi.getStudents(),
-          academicApi.getCourses(),
-          academicApi.getFaculty(),
-          academicApi.getGrades(),
-        ]);
+        const [studentsData, coursesData, facultyData, gradesData] =
+          await Promise.all([
+            academicApi.getStudents(),
+            academicApi.getCourses(),
+            academicApi.getFaculty(),
+            academicApi.getGrades(),
+          ]);
         setStudents(studentsData);
         setCourses(coursesData);
         setFaculty(facultyData);
@@ -74,11 +81,17 @@ export default function DashboardPage() {
   }, [students, gradesByStudent]);
 
   const popularCourses = useMemo(() => {
-    return [...enrollmentByCourse].sort((a, b) => b.count - a.count).slice(0, 5);
+    return [...enrollmentByCourse]
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5);
   }, [enrollmentByCourse]);
 
   if (loading) {
-    return <div className="text-sm text-slate-500">Loading dashboard insights...</div>;
+    return (
+      <div className="text-sm text-slate-500">
+        Loading dashboard insights...
+      </div>
+    );
   }
 
   return (
@@ -96,7 +109,12 @@ export default function DashboardPage() {
       />
 
       <div className="grid gap-4 md:grid-cols-3">
-        <StatCard title="Total Students" value={students.length} description="Active learner records" icon={Users} />
+        <StatCard
+          title="Total Students"
+          value={students.length}
+          description="Active learner records"
+          icon={Users}
+        />
         <StatCard
           title="Total Courses"
           value={courses.length}
@@ -114,7 +132,9 @@ export default function DashboardPage() {
       <Card>
         <CardHeader>
           <CardTitle>Quick Actions</CardTitle>
-          <CardDescription>Jump into the most common workflows.</CardDescription>
+          <CardDescription>
+            Jump into the most common workflows.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-3 md:grid-cols-3">
@@ -123,21 +143,27 @@ export default function DashboardPage() {
               className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium text-slate-700 hover:border-emerald-200 hover:bg-emerald-50"
             >
               Add a new student
-              <p className="mt-1 text-xs text-slate-500">Capture profile, grades, and attributes.</p>
+              <p className="mt-1 text-xs text-slate-500">
+                Capture profile, grades, and attributes.
+              </p>
             </Link>
             <Link
               href="/courses/new"
               className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium text-slate-700 hover:border-emerald-200 hover:bg-emerald-50"
             >
               Create a course
-              <p className="mt-1 text-xs text-slate-500">Assign faculty and metadata.</p>
+              <p className="mt-1 text-xs text-slate-500">
+                Assign faculty and metadata.
+              </p>
             </Link>
             <Link
               href="/faculty"
               className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium text-slate-700 hover:border-emerald-200 hover:bg-emerald-50"
             >
               Open faculty panel
-              <p className="mt-1 text-xs text-slate-500">Enroll students and update grades.</p>
+              <p className="mt-1 text-xs text-slate-500">
+                Enroll students and update grades.
+              </p>
             </Link>
           </div>
         </CardContent>
@@ -170,10 +196,17 @@ export default function DashboardPage() {
             <div className="space-y-3">
               {popularCourses.length ? (
                 popularCourses.map((entry) => (
-                  <div key={entry.course.id} className="flex items-center justify-between">
+                  <div
+                    key={entry.course.id}
+                    className="flex items-center justify-between"
+                  >
                     <div>
-                      <p className="text-sm font-medium text-slate-900">{entry.course.title}</p>
-                      <p className="text-xs text-slate-500">{entry.course.code}</p>
+                      <p className="text-sm font-medium text-slate-900">
+                        {entry.course.title}
+                      </p>
+                      <p className="text-xs text-slate-500">
+                        {entry.course.code}
+                      </p>
                     </div>
                     <Badge>{entry.count} enrolled</Badge>
                   </div>
@@ -206,11 +239,16 @@ export default function DashboardPage() {
                 <tbody className="divide-y divide-slate-100">
                   {topStudents.map(({ student, gpa }) => (
                     <tr key={student.id}>
-                      <td className="py-3 font-medium text-slate-900">{formatStudentName(student)}</td>
+                      <td className="py-3 font-medium text-slate-900">
+                        {formatStudentName(student)}
+                      </td>
                       <td className="py-3 text-slate-500">{student.year}</td>
                       <td className="py-3 text-slate-700">{gpa.toFixed(2)}</td>
                       <td className="py-3">
-                        <Link className="text-emerald-600 hover:text-emerald-700" href={`/students/${student.id}`}>
+                        <Link
+                          className="text-emerald-600 hover:text-emerald-700"
+                          href={`/students/${student.id}`}
+                        >
                           View
                         </Link>
                       </td>
@@ -230,14 +268,19 @@ export default function DashboardPage() {
           <CardContent>
             <div className="space-y-3">
               {topStudents.map(({ student, gpa }, index) => (
-                <div key={student.id} className="flex items-center justify-between">
+                <div
+                  key={student.id}
+                  className="flex items-center justify-between"
+                >
                   <div>
                     <p className="text-sm font-medium text-slate-900">
                       #{index + 1} {formatStudentName(student)}
                     </p>
                     <p className="text-xs text-slate-500">{student.major}</p>
                   </div>
-                  <Badge className="bg-emerald-100 text-emerald-700">{gpa.toFixed(2)} GPA</Badge>
+                  <Badge className="bg-emerald-100 text-emerald-700">
+                    {gpa.toFixed(2)} GPA
+                  </Badge>
                 </div>
               ))}
             </div>

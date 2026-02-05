@@ -52,7 +52,9 @@ export function Modal({
         <div className="flex items-start justify-between gap-4">
           <div>
             <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
-            {description ? <p className="text-sm text-slate-500">{description}</p> : null}
+            {description ? (
+              <p className="text-sm text-slate-500">{description}</p>
+            ) : null}
           </div>
           <button
             type="button"
@@ -64,7 +66,9 @@ export function Modal({
           </button>
         </div>
         <div className="mt-4">{children}</div>
-        {footer ? <div className="mt-6 flex justify-end gap-2">{footer}</div> : null}
+        {footer ? (
+          <div className="mt-6 flex justify-end gap-2">{footer}</div>
+        ) : null}
       </div>
     </div>
   );

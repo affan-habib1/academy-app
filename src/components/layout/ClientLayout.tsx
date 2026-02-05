@@ -23,7 +23,10 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("academic.sidebarCollapsed", String(sidebarCollapsed));
+    window.localStorage.setItem(
+      "academic.sidebarCollapsed",
+      String(sidebarCollapsed),
+    );
   }, [sidebarCollapsed]);
 
   return (
@@ -37,14 +40,23 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
               sidebarOpen ? "translate-x-0" : "-translate-x-full",
             )}
           >
-            <div className={cn("flex items-center justify-between px-4", sidebarCollapsed ? "lg:px-3" : "lg:px-4")}>
+            <div
+              className={cn(
+                "flex items-center justify-between px-4",
+                sidebarCollapsed ? "lg:px-3" : "lg:px-4",
+              )}
+            >
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-sm font-semibold text-white">
                   AO
                 </div>
                 <div className={cn(sidebarCollapsed ? "lg:hidden" : "")}>
-                  <p className="text-xs font-semibold tracking-[0.24em] text-emerald-600 uppercase">AcademicOS</p>
-                  <p className="text-lg font-semibold text-slate-900">Management Suite</p>
+                  <p className="text-xs font-semibold tracking-[0.24em] text-emerald-600 uppercase">
+                    AcademicOS
+                  </p>
+                  <p className="text-lg font-semibold text-slate-900">
+                    Management Suite
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -59,10 +71,18 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
               </div>
             </div>
 
-            <nav className={cn("mt-8 flex flex-1 flex-col gap-1 px-4", sidebarCollapsed ? "lg:px-3" : "lg:px-4")}>
+            <nav
+              className={cn(
+                "mt-8 flex flex-1 flex-col gap-1 px-4",
+                sidebarCollapsed ? "lg:px-3" : "lg:px-4",
+              )}
+            >
               {NAV_ITEMS.map((item) => {
                 const Icon = item.icon;
-                const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+                const isActive =
+                  item.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(item.href);
                 return (
                   <Link
                     key={item.href}
@@ -85,7 +105,9 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
                     >
                       <Icon className="h-4 w-4" />
                     </span>
-                    <span className={cn(sidebarCollapsed ? "lg:hidden" : "")}>{item.label}</span>
+                    <span className={cn(sidebarCollapsed ? "lg:hidden" : "")}>
+                      {item.label}
+                    </span>
                   </Link>
                 );
               })}
@@ -119,12 +141,18 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
                     className="hidden rounded-lg border border-slate-200 p-2 text-slate-500 hover:bg-slate-100 lg:inline-flex"
                     aria-label="Toggle sidebar"
                   >
-                    {sidebarCollapsed ? <ChevronsRight className="h-4 w-4" /> : <ChevronsLeft className="h-4 w-4" />}
+                    {sidebarCollapsed ? (
+                      <ChevronsRight className="h-4 w-4" />
+                    ) : (
+                      <ChevronsLeft className="h-4 w-4" />
+                    )}
                   </button>
                 </div>
               </div>
             </header>
-            <main className="flex-1 overflow-y-auto px-4 py-6 sm:px-6 lg:px-8">{children}</main>
+            <main className="flex-1 overflow-y-auto px-4 py-6 sm:px-6 lg:px-8">
+              {children}
+            </main>
           </div>
         </div>
       </div>

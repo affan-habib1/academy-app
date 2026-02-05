@@ -5,7 +5,13 @@ import type { ApexOptions } from "apexcharts";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-export function EnrollmentBarChart({ categories, data }: { categories: string[]; data: number[] }) {
+export function EnrollmentBarChart({
+  categories,
+  data,
+}: {
+  categories: string[];
+  data: number[];
+}) {
   const options: ApexOptions = {
     chart: {
       toolbar: { show: false },
